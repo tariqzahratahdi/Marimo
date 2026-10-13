@@ -14,5 +14,9 @@ COPY app.py .
 # Back4app routing needs the port exposed (typically 8080)
 EXPOSE 8080
 
+# Create a non-root user and switch to it
+RUN useradd -m app_user
+USER app_user
+
 # Run marimo in app (read-only) mode bound to all network interfaces
 CMD [ "marimo", "run", "app.py", "--host", "0.0.0.0", "-p", "8080" ]
